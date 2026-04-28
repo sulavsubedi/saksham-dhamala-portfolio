@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saksham Dhamala | IT Support & Cloud Technologies</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #0ea5e9; --primary-dark: #0284c7; --secondary: #22c55e; --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        a { color: var(--primary); text-decoration: none; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        /* Navbar */
+        nav { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(14, 165, 233, 0.2); z-index: 1000; padding: 18px 0; }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { color: var(--muted); font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        @media(max-width: 768px) { .nav-links { display: none; } }
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px; position: relative; }
+        .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: radial-gradient(ellipse, rgba(14, 165, 233, 0.12) 0%, transparent 60%); }
+        .hero-content { position: relative; z-index: 1; max-width: 700px; }
+        .hero-badge { display: inline-block; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; color: var(--secondary); margin-bottom: 28px; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero h1 .highlight { color: var(--primary); }
+        .hero p { font-size: 1.2rem; color: var(--muted); max-width: 550px; margin: 0 auto 36px; }
+        .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 14px 36px; border-radius: 10px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; display: inline-block; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(14, 165, 233, 0.4); }
+        .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-outline:hover { background: rgba(14, 165, 233, 0.1); }
+        /* Sections */
+        section { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header .label { color: var(--primary); font-size: 0.85rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 14px; }
+        .section-header p { color: var(--muted); max-width: 500px; margin: 0 auto; }
+        /* Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .card { background: var(--card); border-radius: 16px; padding: 32px; border: 1px solid rgba(255, 255, 255, 0.06); transition: all 0.3s; }
+        .card:hover { transform: translateY(-6px); border-color: rgba(14, 165, 233, 0.3); }
+        .card h3 { font-size: 1.25rem; margin-bottom: 8px; color: var(--text); }
+        .card .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 14px; }
+        .card p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; }
+        .card ul { list-style: none; margin-top: 14px; }
+        .card ul li { padding: 6px 0; color: var(--muted); font-size: 0.95rem; display: flex; align-items: flex-start; gap: 10px; }
+        .card ul li::before { content: '\2192'; color: var(--primary); font-weight: bold; }
+        /* Skills */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+        .skill-item { background: var(--card); border-radius: 12px; padding: 24px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.06); transition: all 0.3s; }
+        .skill-item:hover { border-color: var(--primary); transform: translateY(-4px); }
+        .skill-item .icon { font-size: 2.2rem; margin-bottom: 12px; }
+        .skill-item h4 { color: var(--text); font-size: 1rem; margin-bottom: 4px; }
+        .skill-item p { color: var(--muted); font-size: 0.85rem; }
+        /* Timeline */
+        .timeline { max-width: 700px; margin: 0 auto; }
+        .timeline-item { position: relative; padding-left: 32px; margin-bottom: 32px; }
+        .timeline-item::before { content: ''; position: absolute; left: 0; top: 8px; width: 10px; height: 10px; background: var(--primary); border-radius: 50%; }
+        .timeline-item::after { content: ''; position: absolute; left: 4px; top: 20px; bottom: -24px; width: 2px; background: rgba(148, 163, 184, 0.3); }
+        .timeline-item:last-child::after { display: none; }
+        .timeline-item h3 { font-size: 1.15rem; margin-bottom: 4px; }
+        .timeline-item .company { color: var(--primary); font-weight: 500; font-size: 0.9rem; margin-bottom: 6px; }
+        .timeline-item .date { color: var(--muted); font-size: 0.85rem; margin-bottom: 10px; }
+        .timeline-item p { color: var(--muted); font-size: 0.93rem; }
+        /* Projects */
+        .project-card { background: var(--card); border-radius: 16px; padding: 28px; border: 1px solid rgba(255, 255, 255, 0.06); transition: all 0.3s; }
+        .project-card:hover { border-color: var(--primary); transform: translateY(-6px); }
+        .project-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+        .project-card .tech { color: var(--secondary); font-size: 0.85rem; margin-bottom: 12px; font-weight: 600; }
+        .project-card p { color: var(--muted); font-size: 0.93rem; line-height: 1.7; }
+        /* Contact */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .contact-card { background: var(--card); border-radius: 12px; padding: 28px 24px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.06); transition: all 0.3s; }
+        .contact-card:hover { border-color: var(--primary); transform: translateY(-4px); }
+        .contact-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
+        .contact-card h4 { color: var(--text); font-size: 0.95rem; margin-bottom: 4px; }
+        .contact-card p { color: var(--muted); font-size: 0.88rem; }
+        /* Footer */
+        footer { background: rgba(30, 41, 59, 0.6); padding: 40px 0 30px; border-top: 1px solid rgba(255, 255, 255, 0.06); }
+        footer .container { text-align: center; }
+        footer p { color: var(--muted); font-size: 0.9rem; }
+        @media(max-width: 768px) { .hero h1 { font-size: 2.2rem; } .section-header h2 { font-size: 1.8rem; } }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container">
+            <div class="logo">Saksham.dev</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Open to IT Support Roles</span>
+            <h1>Hi, I'm <span class="highlight">Saksham Dhamala</span></h1>
+            <p>Motivated IT graduate passionate about support, networking, and cloud technologies. Ready to troubleshoot, adapt, and deliver reliable solutions.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#experience" class="btn btn-outline">View Experience</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">About Me</span>
+                <h2>IT Graduate & Problem Solver</h2>
+                <p>Skilled at problem-solving, adapting quickly, and providing reliable support in customer-facing environments.</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Technical Support</h3>
+                    <p class="meta">Troubleshooting & Helpdesk</p>
+                    <p>Experienced in diagnosing and resolving IT issues methodically, from hardware setup to software troubleshooting.</p>
+                </div>
+                <div class="card">
+                    <h3>Networking</h3>
+                    <p class="meta">TCP/IP, Wi-Fi, Routing</p>
+                    <p>Hands-on experience with network configuration, router setup, and packet analysis using Wireshark.</p>
+                </div>
+                <div class="card">
+                    <h3>Cloud Technologies</h3>
+                    <p class="meta">Azure, AWS, M365</p>
+                    <p>Practical knowledge of Microsoft Azure, AWS free-tier, and Microsoft 365 suite for cloud-based solutions.</p>
+                </div>
+                <div class="card">
+                    <h3>Customer Service</h3>
+                    <p class="meta">Multi-channel Support</p>
+                    <p>Strong communication skills built through customer-facing roles, delivering support via phone, email, and in-person.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" style="background: rgba(14, 165, 233, 0.04);">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">Skills</span>
+                <h2>Technical Abilities</h2>
+                <p>Tools and technologies I work with</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item"><div class="icon">&#128187;</div><h4>Windows / Linux</h4><p>OS & CLI</p></div>
+                <div class="skill-item"><div class="icon">&#128246;</div><h4>TCP/IP Networking</h4><p>Wi-Fi & Routers</p></div>
+                <div class="skill-item"><div class="icon">&#9729;</div><h4>Microsoft Azure</h4><p>Cloud Computing</p></div>
+                <div class="skill-item"><div class="icon">&#128188;</div><h4>Microsoft 365</h4><p>Teams, Outlook, OneDrive</p></div>
+                <div class="skill-item"><div class="icon">&#128202;</div><h4>Wireshark</h4><p>Packet Analysis</p></div>
+                <div class="skill-item"><div class="icon">&#128196;</div><h4>ServiceNow</h4><p>Ticketing System</p></div>
+                <div class="skill-item"><div class="icon">&#128295;</div><h4>Python</h4><p>Scripting & Automation</p></div>
+                <div class="skill-item"><div class="icon">&#128296;</div><h4>PowerShell</h4><p>Automation Tasks</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">Experience</span>
+                <h2>Work History</h2>
+                <p>Professional roles that shaped my IT journey</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Customer Support Administration</h3>
+                    <p class="company">Aid Properties Pty Ltd | Sydney, NSW</p>
+                    <p class="date">April 2022 &mdash; Present</p>
+                    <p>Delivered multi-channel support (phone, email, in-person) with a focus on resolving issues quickly. Handled data entry and system scheduling with accuracy. Assisted clients using digital platforms like Landlord Studio, demonstrating adaptability to technology. Built strong communication and teamwork skills in a fast-paced environment.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Student Tutor</h3>
+                    <p class="company">Federation University</p>
+                    <p class="date">2017 &mdash; 2020</p>
+                    <p>Supported fellow students with IT concepts and coursework. Awarded the Vice Chancellor's Scholarship. Graduated Summa Cum Laude with a 6.59 GPA out of 7.0.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" style="background: rgba(14, 165, 233, 0.04);">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">Education</span>
+                <h2>Qualifications</h2>
+            </div>
+            <div class="card" style="max-width:700px;margin:0 auto;">
+                <h3>Bachelor of Information Technology</h3>
+                <p class="meta">Federation University | Graduated Summa Cum Laude &middot; GPA 6.59/7.0</p>
+                <ul>
+                    <li>Vice Chancellor's Scholarship recipient</li>
+                    <li>Student Tutor &mdash; mentored peers in IT fundamentals</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">Projects</span>
+                <h2>Academic Projects</h2>
+                <p>Hands-on projects demonstrating practical IT skills</p>
+            </div>
+            <div class="grid">
+                <div class="project-card">
+                    <h3>Network Simulation</h3>
+                    <p class="tech">Cisco Packet Tracer</p>
+                    <p>Designed a small office LAN setup with routing, switching, and IP addressing. Configured network devices and tested connectivity across the simulated environment.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Wireshark Analysis</h3>
+                    <p class="tech">Wireshark &middot; Network Protocols</p>
+                    <p>Captured and reviewed network packets including HTTP and DNS to understand protocol behavior and network traffic patterns.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Cloud Practice</h3>
+                    <p class="tech">Microsoft Azure &middot; Free Tier</p>
+                    <p>Created virtual machines and storage solutions using Azure free-tier resources. Gained hands-on experience with cloud infrastructure and resource management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" style="background: rgba(14, 165, 233, 0.04);">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">Certifications</span>
+                <h2>Courses & Training</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Introduction to Cloud Computing</h3>
+                    <p class="meta">Microsoft Learn | Self-paced</p>
+                    <p>Online course covering cloud fundamentals and Azure basics.</p>
+                </div>
+                <div class="card">
+                    <h3>Fundamentals of Digital Skills</h3>
+                    <p class="meta">Google Digital Garage | Completed</p>
+                    <p>Digital literacy and online productivity certification.</p>
+                </div>
+                <div class="card">
+                    <h3>Python & Networking Basics</h3>
+                    <p class="meta">FreeCodeCamp | Ongoing</p>
+                    <p>Self-learning through online modules on Python scripting and networking fundamentals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests -->
+    <section id="interests">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">Interests</span>
+                <h2>What Drives Me</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>AI Enthusiast</h3>
+                    <p>Exploring AI tools like ChatGPT and beginner-level Python ML tutorials.</p>
+                </div>
+                <div class="card">
+                    <h3>Cloud Learning</h3>
+                    <p>Hands-on practice with Microsoft Azure and AWS free-tier projects.</p>
+                </div>
+                <div class="card">
+                    <h3>Community Engagement</h3>
+                    <p>Attending Sydney tech meetups (Cloud, AI, IT Support) to connect with professionals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="background: rgba(14, 165, 233, 0.04);">
+        <div class="container">
+            <div class="section-header">
+                <span class="label">Contact</span>
+                <h2>Let's Connect</h2>
+                <p>Looking for entry-level IT Support opportunities</p>
+            </div>
+            <div class="contact-grid">
+                <a href="mailto:Sakshamdhamala98@gmail.com" class="contact-card">
+                    <div class="icon">&#9993;</div>
+                    <h4>Email</h4>
+                    <p>Sakshamdhamala98@gmail.com</p>
+                </a>
+                <a href="tel:0466997987" class="contact-card">
+                    <div class="icon">&#128222;</div>
+                    <h4>Phone</h4>
+                    <p>0466 997 987</p>
+                </a>
+                <a href="https://linkedin.com/in/Saksham-dhamala" class="contact-card">
+                    <div class="icon">&#128188;</div>
+                    <h4>LinkedIn</h4>
+                    <p>linkedin.com/in/Saksham-dhamala</p>
+                </a>
+                <div class="contact-card">
+                    <div class="icon">&#128205;</div>
+                    <h4>Location</h4>
+                    <p>Sydney, NSW</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Saksham Dhamala. All rights reserved.</p>
+            <p style="margin-top:8px;">IT Support & Cloud Technologies | Sydney, NSW</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
